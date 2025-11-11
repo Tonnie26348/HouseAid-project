@@ -52,40 +52,26 @@ const Home = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-hero opacity-5" />
+      <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Empowering Domestic Workers,{" "}
-                <span className="gradient-primary bg-clip-text text-transparent">
-                  Supporting Families
-                </span>
-              </h1>
-              <p className="text-xl text-muted-foreground mb-8">
-                HouseAid connects verified domestic workers with households across Kenya. 
-                Fair wages, digital contracts, GPS tracking, and career development for workers.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/employers">
-                  <Button size="lg" className="gradient-primary text-primary-foreground w-full sm:w-auto">
-                    For Employers
-                  </Button>
-                </Link>
-                <Link to="/workers">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                    For Workers
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            <div className="relative animate-slide-up">
-              <img 
-                src={heroImage} 
-                alt="Happy family with domestic worker" 
-                className="rounded-2xl shadow-medium w-full h-auto"
-              />
+          <div className="max-w-3xl animate-fade-in">
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              Transforming <span className="text-primary">Domestic Work</span> in Kenya
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8">
+              Connecting verified, trained domestic workers with households through professionalism, technology, and trust.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/employers">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto rounded-full px-8">
+                  I'm Hiring
+                </Button>
+              </Link>
+              <Link to="/workers">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full sm:w-auto rounded-full px-8">
+                  I'm Looking for Work
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
