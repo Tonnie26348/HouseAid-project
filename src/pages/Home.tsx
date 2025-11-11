@@ -61,7 +61,7 @@ const Home = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Connecting verified, trained domestic workers with households through professionalism, technology, and trust.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link to="/employers">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto rounded-full px-8">
                   I'm Hiring
@@ -72,6 +72,13 @@ const Home = () => {
                   I'm Looking for Work
                 </Button>
               </Link>
+            </div>
+            <div className="mt-8">
+              <img 
+                src={heroImage} 
+                alt="Happy family with domestic worker in a modern living room" 
+                className="rounded-2xl shadow-large w-full max-w-2xl object-cover"
+              />
             </div>
           </div>
         </div>
