@@ -101,17 +101,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose HouseAid */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Why Choose HouseAid?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We're revolutionizing domestic work with technology, transparency, and trust
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Features */}
       <section className="py-16">
