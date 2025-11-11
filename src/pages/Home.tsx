@@ -77,39 +77,38 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Problem & Solution */}
+      {/* Stats Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-4xl lg:text-5xl font-bold text-primary mb-2">5,000+</h3>
+              <p className="text-muted-foreground">Verified Workers</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-4xl lg:text-5xl font-bold text-primary mb-2">10,000+</h3>
+              <p className="text-muted-foreground">Happy Households</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-4xl lg:text-5xl font-bold text-primary mb-2">98%</h3>
+              <p className="text-muted-foreground">Satisfaction Rate</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-4xl lg:text-5xl font-bold text-primary mb-2">24/7</h3>
+              <p className="text-muted-foreground">Support Available</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose HouseAid */}
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">The Problem We're Solving</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Domestic workers face unfair wages, lack of contracts, and limited career growth. 
-              Families struggle to find verified, trustworthy workers. HouseAid bridges this gap 
-              with technology, training, and transparency.
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Why Choose HouseAid?</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We're revolutionizing domestic work with technology, transparency, and trust
             </p>
-            <div className="grid md:grid-cols-3 gap-6 mt-12">
-              <Card className="p-6 text-center">
-                <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <h3 className="font-semibold mb-2">2M+ Workers</h3>
-                <p className="text-sm text-muted-foreground">In Kenya's informal sector</p>
-              </Card>
-              <Card className="p-6 text-center">
-                <div className="w-12 h-12 gradient-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-6 w-6 text-secondary-foreground" />
-                </div>
-                <h3 className="font-semibold mb-2">Growing Demand</h3>
-                <p className="text-sm text-muted-foreground">For qualified home help</p>
-              </Card>
-              <Card className="p-6 text-center">
-                <div className="w-12 h-12 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="h-6 w-6 text-success-foreground" />
-                </div>
-                <h3 className="font-semibold mb-2">Better Standards</h3>
-                <p className="text-sm text-muted-foreground">Through training & certification</p>
-              </Card>
-            </div>
           </div>
         </div>
       </section>
@@ -185,6 +184,11 @@ const Home = () => {
                   <p className="text-sm text-muted-foreground">Employer, Nairobi</p>
                 </div>
               </div>
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <CheckCircle key={i} className="h-4 w-4 fill-primary text-primary" />
+                ))}
+              </div>
               <p className="text-muted-foreground">
                 "HouseAid helped me find a verified, professional nanny for my kids. The GPS tracking and digital payments make everything so much easier!"
               </p>
@@ -197,6 +201,11 @@ const Home = () => {
                   <p className="text-sm text-muted-foreground">Domestic Worker</p>
                 </div>
               </div>
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <CheckCircle key={i} className="h-4 w-4 fill-primary text-primary" />
+                ))}
+              </div>
               <p className="text-muted-foreground">
                 "The training I received through HouseAid changed my life. I now have a formal contract and earn fair wages with benefits!"
               </p>
@@ -208,6 +217,11 @@ const Home = () => {
                   <h4 className="font-semibold">David Omondi</h4>
                   <p className="text-sm text-muted-foreground">Family, Mombasa</p>
                 </div>
+              </div>
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <CheckCircle key={i} className="h-4 w-4 fill-primary text-primary" />
+                ))}
               </div>
               <p className="text-muted-foreground">
                 "Finding reliable house help was always stressful. HouseAid's verification process gives us complete peace of mind."

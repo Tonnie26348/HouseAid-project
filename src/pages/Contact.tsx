@@ -17,7 +17,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      info: "+254 700 000 000",
+      info: "+254798121497",
       description: "Mon-Fri, 8am-6pm EAT"
     },
     {
@@ -136,7 +136,7 @@ const Contact = () => {
                     <Phone className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <p className="text-muted-foreground">+254 700 000 000</p>
+                      <p className="text-muted-foreground">+254798121497</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">

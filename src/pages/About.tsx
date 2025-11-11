@@ -89,9 +89,8 @@ const About = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="w-48 h-48 gradient-primary rounded-full flex-shrink-0" />
                 <div>
-                  <h3 className="text-2xl font-bold mb-4">Tonny Kakumu Mutea</h3>
                   <p className="text-muted-foreground mb-4">
-                    Growing up in Nairobi, I witnessed the struggles of domestic workers firsthand. 
+                    Growing up in Nairobi, we witnessed the struggles of domestic workers firsthand. 
                     Many skilled, hardworking individuals were trapped in informal arrangements with 
                     no contracts, unfair wages, and limited opportunities for growth.
                   </p>
