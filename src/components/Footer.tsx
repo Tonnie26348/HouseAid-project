@@ -12,7 +12,7 @@ const Footer = () => {
               <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
                 <Home className="h-6 w-6 text-primary-foreground" />
               </div>
-              <span className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-foreground">
                 HouseAid
               </span>
             </div>
