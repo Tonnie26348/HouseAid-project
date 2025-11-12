@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, Shield, Smartphone, Users, TrendingUp, Award, MapPin, FileText } from "lucide-react";
+import { CheckCircle, Shield, Smartphone, Users, TrendingUp, Award, MapPin, FileText, Star } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-home.jpg";
+import testimonialSarah from "@/assets/testimonial-sarah.jpg";
+import testimonialJane from "@/assets/testimonial-jane.jpg";
+import testimonialDavid from "@/assets/testimonial-david.jpg";
 
 const Home = () => {
   const features = [
@@ -174,7 +177,7 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 gradient-primary rounded-full mr-4" />
+                <img src={testimonialSarah} alt="Sarah Mwangi" className="w-12 h-12 rounded-full mr-4 object-cover" />
                 <div>
                   <h4 className="font-semibold">Sarah Mwangi</h4>
                   <p className="text-sm text-muted-foreground">Employer, Nairobi</p>
@@ -182,7 +185,7 @@ const Home = () => {
               </div>
               <div className="flex gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <CheckCircle key={i} className="h-4 w-4 fill-primary text-primary" />
+                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
               <p className="text-muted-foreground">
@@ -191,7 +194,7 @@ const Home = () => {
             </Card>
             <Card className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 gradient-secondary rounded-full mr-4" />
+                <img src={testimonialJane} alt="Jane Wanjiku" className="w-12 h-12 rounded-full mr-4 object-cover" />
                 <div>
                   <h4 className="font-semibold">Jane Wanjiku</h4>
                   <p className="text-sm text-muted-foreground">Domestic Worker</p>
@@ -199,7 +202,7 @@ const Home = () => {
               </div>
               <div className="flex gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <CheckCircle key={i} className="h-4 w-4 fill-primary text-primary" />
+                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
               <p className="text-muted-foreground">
@@ -208,7 +211,7 @@ const Home = () => {
             </Card>
             <Card className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-success rounded-full mr-4" />
+                <img src={testimonialDavid} alt="David Omondi" className="w-12 h-12 rounded-full mr-4 object-cover" />
                 <div>
                   <h4 className="font-semibold">David Omondi</h4>
                   <p className="text-sm text-muted-foreground">Family, Mombasa</p>
@@ -216,7 +219,7 @@ const Home = () => {
               </div>
               <div className="flex gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
-                  <CheckCircle key={i} className="h-4 w-4 fill-primary text-primary" />
+                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
               <p className="text-muted-foreground">
