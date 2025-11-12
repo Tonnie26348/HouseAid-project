@@ -96,11 +96,7 @@ const Workers = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Build a{" "}
-                <span className="gradient-primary bg-clip-text text-transparent">
-                  Professional Career
-                </span>{" "}
-                in Domestic Work
+                Build a Professional Career in Domestic Work
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 Get free training, earn certifications, work with verified employers, 

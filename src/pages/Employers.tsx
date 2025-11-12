@@ -74,11 +74,7 @@ const Employers = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Find{" "}
-                <span className="gradient-primary bg-clip-text text-transparent">
-                  Verified, Trustworthy
-                </span>{" "}
-                Domestic Workers
+                Find Verified, Trustworthy Domestic Workers
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 Connect with professional domestic workers who have been background-checked, trained, and certified. 
