@@ -1,239 +1,195 @@
-import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Code, GraduationCap, Handshake, Building, Heart, Users } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { supabase } from "@/lib/supabase";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
+
+const formSchema = z
+  .object({
+    fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
+    email: z.string().email({ message: "Invalid email address." }),
+    password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+    confirmPassword: z.string(),
+    role: z.enum(["employer", "worker"], {
+      required_error: "You need to select a role.",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match.",
+    path: ["confirmPassword"],
+  });
 
 const Join = () => {
-  const opportunities = [
-    {
-      icon: Code,
-      title: "Developers & Engineers",
-      description: "Help us build the platform that's transforming domestic work in Kenya.",
-      skills: ["React", "Node.js", "Mobile Development", "UI/UX Design"]
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
-    {
-      icon: GraduationCap,
-      title: "Trainers & Mentors",
-      description: "Share your expertise to train and certify domestic workers in various skills.",
-      skills: ["Childcare", "Cooking", "Professional Etiquette", "Life Skills"]
-    },
-    {
-      icon: Building,
-      title: "NGO & Corporate Partners",
-      description: "Partner with us to expand our reach and impact across Kenya.",
-      skills: ["CSR Programs", "Funding", "Distribution", "Community Outreach"]
-    },
-    {
-      icon: Handshake,
-      title: "Investors & Advisors",
-      description: "Join us in scaling a social enterprise that makes a real difference.",
-      skills: ["Strategic Guidance", "Funding", "Network Access", "Business Development"]
-    }
-  ];
+  });
 
-  const benefits = [
-    "Work on a mission-driven project with real social impact",
-    "Flexible remote and part-time opportunities",
-    "Be part of Kenya's growing tech-for-good ecosystem",
-    "Build your portfolio with meaningful work",
-    "Connect with like-minded professionals and social entrepreneurs"
-  ];
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { error } = await supabase.auth.signUp({
+      email: values.email,
+      password: values.password,
+      options: {
+        data: {
+          full_name: values.fullName,
+          role: values.role,
+        },
+      },
+    });
+
+    if (error) {
+      toast({
+        title: "Error signing up",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Account created!",
+        description: "Please check your email to verify your account.",
+      });
+      navigate("/login");
+    }
+  };
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      
-      {/* Hero */}
-      <section className="pt-24 pb-16 gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">Join the HouseAid Movement</h1>
-          <p className="text-xl opacity-90 max-w-3xl mx-auto">
-            Be part of a mission to transform domestic work in Kenya. 
-            We're looking for passionate individuals and organizations to help us grow.
-          </p>
-        </div>
-      </section>
-
-      {/* Why Join */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Why Join HouseAid?</h2>
-              <p className="text-lg text-muted-foreground">
-                More than a job or partnership – it's an opportunity to create lasting social impact
-              </p>
-            </div>
-            <Card className="p-8">
-              <div className="flex items-center mb-6">
-                <div className="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mr-4">
-                  <Heart className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <h3 className="text-2xl font-bold">Make a Real Difference</h3>
-              </div>
-              <p className="text-lg text-muted-foreground mb-6">
-                HouseAid is addressing a critical need in Kenya's informal economy. 
-                By joining us, you'll directly contribute to:
-              </p>
-              <ul className="space-y-3">
-                {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
-                    <span className="text-muted-foreground">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle>Create an account</CardTitle>
+          <CardDescription>
+            Join HouseAid to find your perfect match.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="John Doe" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="john@example.com"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="role"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>I am an...</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your role" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="employer">Employer</SelectItem>
+                        <SelectItem value="worker">Worker</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Create Account
+              </Button>
+            </form>
+          </Form>
+          <div className="mt-4 text-center text-sm">
+            Already have an account?{" "}
+            <Link to="/login" className="underline">
+              Log in
+            </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Opportunities */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">How You Can Contribute</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We're looking for talented individuals and organizations in various roles
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {opportunities.map((opportunity, index) => {
-              const Icon = opportunity.icon;
-              return (
-                <Card key={index} className="p-8 hover:shadow-medium transition-shadow">
-                  <div className="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mb-4">
-                    <Icon className="h-8 w-8 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-3">{opportunity.title}</h3>
-                  <p className="text-muted-foreground mb-4">{opportunity.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {opportunity.skills.map((skill, skillIndex) => (
-                      <span 
-                        key={skillIndex}
-                        className="px-3 py-1 bg-muted text-sm rounded-full border border-border"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Partnership Types */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Partnership Opportunities</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We're open to various types of partnerships
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="p-6 text-center">
-              <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Volunteer Programs</h3>
-              <p className="text-muted-foreground">
-                Contribute your time and skills on a flexible basis
-              </p>
-            </Card>
-            <Card className="p-6 text-center">
-              <div className="w-16 h-16 gradient-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Handshake className="h-8 w-8 text-secondary-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Strategic Partnerships</h3>
-              <p className="text-muted-foreground">
-                Long-term collaboration with NGOs and corporations
-              </p>
-            </Card>
-            <Card className="p-6 text-center">
-              <div className="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
-                <Building className="h-8 w-8 text-success-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Investment & Advisory</h3>
-              <p className="text-muted-foreground">
-                Help us scale with funding and strategic guidance
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Get in Touch</h2>
-              <p className="text-lg text-muted-foreground">
-                Interested in joining us? Fill out the form below and we'll get back to you within 48 hours.
-              </p>
-            </div>
-            <Card className="p-8">
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Your Name</label>
-                    <Input placeholder="John Doe" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Email Address</label>
-                    <Input type="email" placeholder="john@example.com" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone Number</label>
-                  <Input placeholder="+254 700 000 000" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">I'm interested in</label>
-                  <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                    <option>Select an option</option>
-                    <option>Volunteering (Developer/Engineer)</option>
-                    <option>Volunteering (Trainer/Mentor)</option>
-                    <option>NGO Partnership</option>
-                    <option>Corporate Partnership</option>
-                    <option>Investment Opportunity</option>
-                    <option>Advisory Role</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Tell us about yourself</label>
-                  <Textarea 
-                    placeholder="Share your background, skills, and why you want to join HouseAid..." 
-                    rows={6}
-                  />
-                </div>
-                <Button className="w-full gradient-primary text-primary-foreground" size="lg">
-                  Submit Application
-                </Button>
-              </form>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Join Us in Creating Change</h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Together, we can transform domestic work in Kenya and improve thousands of lives
-          </p>
-        </div>
-      </section>
-
-      <Footer />
+        </CardContent>
+      </Card>
     </div>
   );
 };
