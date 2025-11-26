@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
 
 const Blog = () => {
   const posts = [
@@ -66,7 +66,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Header />
       
       {/* Hero */}
       <section className="pt-24 pb-16 gradient-hero text-primary-foreground">

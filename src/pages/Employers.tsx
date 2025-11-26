@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Shield, MapPin, CreditCard, RefreshCw, CheckCircle, Star } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-employers.jpg";
 
 const Employers = () => {
@@ -66,7 +64,6 @@ const Employers = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16">
@@ -245,8 +242,6 @@ const Employers = () => {
           </Link>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

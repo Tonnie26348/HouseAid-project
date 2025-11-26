@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 const Contact = () => {
   const contactMethods = [
@@ -36,7 +34,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
       
       {/* Hero */}
       <section className="pt-24 pb-16 gradient-hero text-primary-foreground">
@@ -194,8 +191,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

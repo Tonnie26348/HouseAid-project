@@ -1,7 +1,5 @@
 import { Card } from "@/components/ui/card";
 import { Heart, Target, Eye, Users, TrendingUp, Award } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 const About = () => {
   const values = [
@@ -36,7 +34,6 @@ const About = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
       
       {/* Hero */}
       <section className="pt-24 pb-16 gradient-hero text-primary-foreground">
@@ -98,7 +95,7 @@ const About = () => {
                     At the same time, families struggled to find trustworthy, verified workers. 
                     The lack of a formal system created anxiety for employers and exploitation for workers.
                   </p>
-                  <p className="text-muted-foreground">
+                  <p className="text-lg text-muted-foreground">
                     HouseAid was born from a simple belief: technology can bridge this gap. 
                     By creating a platform that verifies workers, provides training, ensures fair wages, 
                     and gives both parties the security they need, we can transform an entire industry 
@@ -125,7 +122,7 @@ const About = () => {
               const Icon = value.icon;
               return (
                 <Card key={index} className="p-6 text-center hover:shadow-medium transition-shadow">
-                  <div className="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 gradient-primary rounded-xl flex items-center justify-center mb-4">
                     <Icon className="h-8 w-8 text-primary-foreground" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
@@ -223,8 +220,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

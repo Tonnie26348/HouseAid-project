@@ -1,8 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Search, UserCheck, FileSignature, CreditCard, BarChart } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 const HowItWorks = () => {
   const steps = [
@@ -92,7 +90,6 @@ const HowItWorks = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
       
       {/* Hero */}
       <section className="pt-24 pb-16 gradient-hero text-primary-foreground">
@@ -198,8 +195,6 @@ const HowItWorks = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

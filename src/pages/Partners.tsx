@@ -3,10 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Code, GraduationCap, Handshake, Building, Heart, Users } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
-const Join = () => {
+const Partners = () => {
   const opportunities = [
     {
       icon: Code,
@@ -44,7 +42,6 @@ const Join = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
       
       {/* Hero */}
       <section className="pt-24 pb-16 gradient-hero text-primary-foreground">
@@ -232,10 +229,8 @@ const Join = () => {
           </p>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
 
-export default Join;
+export default Partners;

@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { GraduationCap, Shield, TrendingUp, CreditCard, FileText, Award, CheckCircle } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-workers.jpg";
 
 const Workers = () => {
@@ -88,7 +86,6 @@ const Workers = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16">
@@ -271,8 +268,6 @@ const Workers = () => {
           </Link>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
