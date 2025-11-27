@@ -1,4 +1,4 @@
-const Logo = () => (
+export const Logo = () => (
   <svg
     className="h-8 w-auto"
     fill="none"
@@ -15,5 +15,3 @@ const Logo = () => (
     />
   </svg>
 );
-
-export default Logo;

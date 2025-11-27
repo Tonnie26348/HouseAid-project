@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useScroll } from "@/hooks/useScroll";
-import Logo from "./Logo";
+import { Logo } from "./Logo";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
