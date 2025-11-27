@@ -14,6 +14,9 @@ import Profile from "./pages/Profile";
 import CreateJob from "./pages/CreateJob";
 import Jobs from "./pages/Jobs";
 import JobDetail from "./pages/JobDetail";
+import MyWorkers from "./pages/MyWorkers";
+import Contracts from "./pages/Contracts";
+import Unauthorized from "./pages/Unauthorized";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
@@ -24,6 +27,8 @@ import NotFound from "./pages/NotFound";
 import MainLayout from "./components/shared/MainLayout";
 import { AuthProvider } from "./hooks/useAuth";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
+import HouseholdProtectedRoute from "./components/shared/HouseholdProtectedRoute";
+import WorkerProtectedRoute from "./components/shared/WorkerProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -49,13 +54,27 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/update-password" element={<UpdatePassword />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+
+            {/* Generic Protected Routes (accessible to any authenticated user) */}
             <Route element={<ProtectedRoute />}>
               <Route path="/platform" element={<Platform />} />
               <Route path="/platform/profile" element={<Profile />} />
               <Route path="/platform/jobs/new" element={<CreateJob />} />
+            </Route>
+
+            {/* Household Protected Routes */}
+            <Route element={<HouseholdProtectedRoute />}>
+              <Route path="/platform/workers" element={<MyWorkers />} />
+              <Route path="/platform/contracts" element={<Contracts />} />
+            </Route>
+
+            {/* Worker Protected Routes */}
+            <Route element={<WorkerProtectedRoute />}>
               <Route path="/platform/jobs" element={<Jobs />} />
               <Route path="/platform/jobs/:id" element={<JobDetail />} />
             </Route>
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

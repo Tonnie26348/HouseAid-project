@@ -44,6 +44,7 @@ const Profile = () => {
   const { toast } = useToast();
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
@@ -110,6 +111,39 @@ const Profile = () => {
         }
     }
   };
+
+  const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      return;
+    }
+
+    if (user) {
+      const file = event.target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}.${fileExt}`;
+      
+      setUploading(true);
+
+      const { error } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, file, { upsert: true });
+
+      if (error) {
+        toast({
+          title: "Error uploading avatar",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        const { data } = supabase.storage.from('avatars').getPublicUrl(fileName);
+        form.setValue('avatar_url', data.publicUrl);
+        toast({
+            title: "Avatar updated successfully!",
+        });
+      }
+      setUploading(false);
+    }
+  }
   
   if (loading) {
     return <div>Loading profile...</div>
@@ -127,6 +161,15 @@ const Profile = () => {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <img src={form.watch('avatar_url') || 'https://via.placeholder.com/150'} alt="Avatar" className="w-20 h-20 rounded-full" />
+                <div className="flex flex-col">
+                  <FormLabel>Avatar</FormLabel>
+                  <Input type="file" onChange={uploadAvatar} disabled={uploading} />
+                  {uploading && <p>Uploading...</p>}
+                </div>
+              </div>
+
               <FormField
                 control={form.control}
                 name="full_name"
@@ -135,19 +178,6 @@ const Profile = () => {
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input placeholder="Your full name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="avatar_url"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Avatar URL</FormLabel>
-                    <FormControl>
-                      <Input placeholder="https://example.com/avatar.png" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
