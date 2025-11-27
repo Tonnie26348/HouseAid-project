@@ -59,7 +59,7 @@ const Join = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { error } = await supabase.auth.signUp({
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
       options: {
@@ -70,18 +70,40 @@ const Join = () => {
       },
     });
 
-    if (error) {
+    if (signUpError) {
       toast({
         title: "Error signing up",
-        description: error.message,
+        description: signUpError.message,
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Account created!",
-        description: "Please check your email to verify your account.",
-      });
-      navigate("/login");
+      return;
+    }
+
+    if (signUpData.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([
+            { id: signUpData.user.id, full_name: values.fullName, role: values.role },
+          ]);
+
+        if (profileError) {
+            toast({
+                title: "Error creating profile",
+                description: profileError.message,
+                variant: "destructive",
+            });
+            //
+            // TODO: what to do if profile creation fails?
+            // Should I delete the user? For now, I will just show an error.
+            //
+            return;
+        }
+
+        toast({
+            title: "Account created!",
+            description: "Please check your email to verify your account.",
+        });
+        navigate("/login");
     }
   };
 

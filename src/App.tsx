@@ -10,10 +10,16 @@ import HowItWorks from "./pages/HowItWorks";
 import About from "./pages/About";
 import Partners from "./pages/Partners";
 import Platform from "./pages/Platform";
+import Profile from "./pages/Profile";
+import CreateJob from "./pages/CreateJob";
+import Jobs from "./pages/Jobs";
+import JobDetail from "./pages/JobDetail";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
+import ForgotPassword from "./pages/ForgotPassword";
+import UpdatePassword from "./pages/UpdatePassword";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./components/shared/MainLayout";
 import { AuthProvider } from "./hooks/useAuth";
@@ -41,8 +47,14 @@ const App = () => (
             </Route>
             <Route path="/join" element={<Join />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/update-password" element={<UpdatePassword />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/platform" element={<Platform />} />
+              <Route path="/platform/profile" element={<Profile />} />
+              <Route path="/platform/jobs/new" element={<CreateJob />} />
+              <Route path="/platform/jobs" element={<Jobs />} />
+              <Route path="/platform/jobs/:id" element={<JobDetail />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
