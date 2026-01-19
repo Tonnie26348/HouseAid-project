@@ -39,6 +39,8 @@ const CreateJob = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  console.log("Current User for debugging:", user);
+
   const form = useForm<z.infer<typeof jobSchema>>({
     resolver: zodResolver(jobSchema),
     defaultValues: {
