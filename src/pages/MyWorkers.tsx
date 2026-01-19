@@ -22,7 +22,7 @@ const MyWorkers = () => {
           .from("contracts")
           .select(`
             *,
-            worker:profiles (id, full_name, avatar_url, skills, experience)
+            worker:worker_id (id, full_name, avatar_url, skills, experience)
           `)
           .eq("employer_id", user.id);
 
