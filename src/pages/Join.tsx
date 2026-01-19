@@ -71,6 +71,7 @@ const Join = () => {
     });
 
     if (signUpError) {
+      console.error("Detailed signup error:", signUpError);
       toast({
         title: "Error signing up",
         description: signUpError.message,
