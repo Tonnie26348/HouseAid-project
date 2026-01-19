@@ -71,12 +71,12 @@ const App = () => (
               <Route element={<HouseholdProtectedRoute />}>
                 <Route path="/platform/workers" element={<MyWorkers />} />
                 <Route path="/platform/contracts" element={<Contracts />} />
+                <Route path="/platform/jobs" element={<Jobs />} />
+                <Route path="/platform/jobs/:id" element={<JobDetail />} />
               </Route>
 
               {/* Worker Protected Routes */}
               <Route element={<WorkerProtectedRoute />}>
-                <Route path="/platform/jobs" element={<Jobs />} />
-                <Route path="/platform/jobs/:id" element={<JobDetail />} />
               </Route>
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
