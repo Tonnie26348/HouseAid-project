@@ -206,7 +206,7 @@ const Profile = () => {
                       <FormItem>
                         <FormLabel>Experience</FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Tell us about your experience" {...field} />
+                          <Textarea placeholder="Tell us about your experience" {...field} value={field.value || ''} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
