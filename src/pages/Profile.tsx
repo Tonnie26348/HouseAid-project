@@ -91,24 +91,34 @@ const Profile = () => {
   }, [user, toast, form]);
 
   const onSubmit = async (values: z.infer<typeof profileSchema>) => {
-    if (user) {
-        const { error } = await supabase.from("profiles").update({
-            ...values,
-            skills: values.skills?.split(',').map(s => s.trim()),
-            updated_at: new Date(),
-        }).eq("id", user.id);
+    console.log("Update Profile onSubmit function called.");
 
-        if (error) {
-            toast({
-                title: "Error updating profile",
-                description: error.message,
-                variant: "destructive",
-            });
-        } else {
-            toast({
-                title: "Profile updated successfully!",
-            });
-        }
+    if (user) {
+      console.log("User object exists. Proceeding with update.", user);
+
+      const { error } = await supabase.from("profiles").update({
+          ...values,
+          skills: values.skills?.split(',').map(s => s.trim()),
+          updated_at: new Date(),
+      }).eq("id", user.id);
+
+      console.log("Supabase update returned. Error:", error);
+
+      if (error) {
+        console.log("Error toast should be displayed.");
+        toast({
+            title: "Error updating profile",
+            description: error.message,
+            variant: "destructive",
+        });
+      } else {
+        console.log("Success toast should be displayed.");
+        toast({
+            title: "Profile updated successfully!",
+        });
+      }
+    } else {
+      console.error("User object is null. Cannot update profile.");
     }
   };
 
