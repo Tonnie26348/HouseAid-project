@@ -81,6 +81,27 @@ const Sidebar = () => {
 
 const DashboardHeader = () => {
   const { user } = useAuth();
+  const [profile, setProfile] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const fetchProfile = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("avatar_url, full_name, role")
+          .eq("id", user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching profile for header:", error);
+        } else if (data) {
+          setProfile(data);
+        }
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
 
   return (
     <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-6">
@@ -92,10 +113,10 @@ const DashboardHeader = () => {
           <Bell className="w-6 h-6 text-gray-600" />
         </Button>
         <div className="flex items-center space-x-2">
-          <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+          <img src={profile?.avatar_url || 'https://via.placeholder.com/150'} alt="Avatar" className="w-10 h-10 rounded-full" />
           <div>
-            <div className="font-semibold">{user?.user_metadata.full_name}</div>
-            <div className="text-sm text-gray-500 capitalize">{user?.user_metadata.role}</div>
+            <div className="font-semibold">{profile?.full_name}</div>
+            <div className="text-sm text-gray-500 capitalize">{profile?.role}</div>
           </div>
         </div>
       </div>
