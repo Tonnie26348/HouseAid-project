@@ -10,7 +10,6 @@ CREATE TABLE public.profiles (
   experience TEXT,
   availability TEXT,
   hourly_rate NUMERIC,
-  payment_basis TEXT,
   -- For Households
   address TEXT,
   family_members INT,
