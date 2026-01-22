@@ -143,6 +143,8 @@ const Profile = () => {
       } else {
         const { data } = supabase.storage.from('avatars').getPublicUrl(fileName);
         form.setValue('avatar_url', data.publicUrl);
+        // Automatically submit the form to save the new avatar URL
+        onSubmit(form.getValues());
         toast({
             title: "Avatar updated successfully!",
         });
