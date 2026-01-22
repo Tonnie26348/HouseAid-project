@@ -77,6 +77,7 @@ const Profile = () => {
             variant: "destructive",
           });
         } else if (data) {
+          console.log("Fetched avatar URL:", data.avatar_url);
           setProfile(data);
           form.reset({
             full_name: data.full_name || '',
