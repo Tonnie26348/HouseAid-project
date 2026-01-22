@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import DashboardLayout from "@/components/shared/DashboardLayout";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,6 +37,7 @@ const profileSchema = z.object({
   // Household specific
   address: z.string().optional(),
   family_members: z.coerce.number().optional(),
+  payment_basis: z.string().optional(),
 });
 
 
@@ -57,6 +59,7 @@ const Profile = () => {
       hourly_rate: 0,
       address: "",
       family_members: 0,
+      payment_basis: "",
     },
   });
 
@@ -88,6 +91,7 @@ const Profile = () => {
             hourly_rate: data.hourly_rate || 0,
             address: data.address || '',
             family_members: data.family_members || 0,
+            payment_basis: data.payment_basis || '',
           });
         }
         setLoading(false);
@@ -243,6 +247,29 @@ const Profile = () => {
                         <FormControl>
                           <Input type="number" {...field} />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="payment_basis"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Payment Basis</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a payment basis" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="hourly">Hourly</SelectItem>
+                            <SelectItem value="per day">Per Day</SelectItem>
+                            <SelectItem value="per week">Per Week</SelectItem>
+                            <SelectItem value="monthly">Monthly</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
