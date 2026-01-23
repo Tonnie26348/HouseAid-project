@@ -59,7 +59,7 @@ const Profile = () => {
       hourly_rate: 0,
       address: "",
       family_members: 0,
-      payment_basis: "",
+      payment_basis: "monthly",
     },
   });
 
