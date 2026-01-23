@@ -37,6 +37,12 @@ const profileSchema = z.object({
   // Household specific
   address: z.string().optional(),
   family_members: z.coerce.number().optional(),
+  // New employer-specific fields
+  bio: z.string().optional(),
+  expectations: z.string().optional(),
+  household_rules: z.string().optional(),
+  contact_preferences: z.string().optional(),
+  benefits_offered: z.array(z.string()).optional(),
   payment_basis: z.string().optional(),
 });
 
@@ -60,6 +66,12 @@ const Profile = () => {
       address: "",
       family_members: 0,
       payment_basis: "monthly",
+      // New employer-specific fields
+      bio: "",
+      expectations: "",
+      household_rules: "",
+      contact_preferences: "",
+      benefits_offered: [],
     },
   });
 
@@ -92,6 +104,12 @@ const Profile = () => {
             address: data.address || '',
             family_members: data.family_members || 0,
             payment_basis: data.payment_basis || '',
+            // New employer-specific fields
+            bio: data.bio || '',
+            expectations: data.expectations || '',
+            household_rules: data.household_rules || '',
+            contact_preferences: data.contact_preferences || '',
+            benefits_offered: data.benefits_offered?.join(', ') || '',
           });
         }
         setLoading(false);
@@ -106,6 +124,7 @@ const Profile = () => {
         const { error } = await supabase.from("profiles").update({
             ...values,
             skills: values.skills?.split(',').map(s => s.trim()),
+            benefits_offered: values.benefits_offered?.split(',').map(s => s.trim()),
             updated_at: new Date(),
         }).eq("id", user.id);
 
@@ -300,6 +319,72 @@ const Profile = () => {
                         <FormLabel>Number of Family Members</FormLabel>
                         <FormControl>
                           <Input type="number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {/* New Employer Profile Fields */}
+                  <FormField
+                    control={form.control}
+                    name="bio"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>About Your Household</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Tell us about your household and what you're looking for in a worker." {...field} value={field.value || ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="expectations"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Worker Expectations</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Describe your expectations for workers (e.g., punctuality, communication, responsibilities)." {...field} value={field.value || ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="household_rules"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Household Rules</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="List any important household rules or guidelines (e.g., no smoking, pet care)." {...field} value={field.value || ''} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="contact_preferences"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Contact Preferences</FormLabel>
+                        <FormControl>
+                          <Input placeholder="How do you prefer to be contacted? (e.g., text, call, during work hours only)" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="benefits_offered"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Benefits Offered (comma-separated)</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Flexible hours, Meals provided, Transport allowance" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

@@ -27,6 +27,7 @@ const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AllWorkers = lazy(() => import("./pages/AllWorkers"));
+const EmployerProfileView = lazy(() => import("./pages/EmployerProfileView"));
 
 import MainLayout from "./components/shared/MainLayout";
 import { AuthProvider } from "./hooks/useAuth";
@@ -68,6 +69,7 @@ const App = () => (
                 <Route path="/platform/jobs/new" element={<CreateJob />} />
                 <Route path="/platform/jobs" element={<Jobs />} />
                 <Route path="/platform/jobs/:id" element={<JobDetail />} />
+                <Route path="/platform/employer/:id" element={<EmployerProfileView />} />
               </Route>
 
               {/* Household Protected Routes */}

@@ -97,11 +97,13 @@ const JobDetail = () => {
         </CardHeader>
         <CardContent>
           <div className="flex items-center mb-4">
-            <img src={job.household?.avatar_url || 'https://via.placeholder.com/40'} alt={job.household?.full_name} className="w-10 h-10 rounded-full mr-4" />
-            <div>
-              <p className="font-semibold">{job.household?.full_name}</p>
-              <p className="text-sm text-gray-500">Household</p>
-            </div>
+            <Link to={`/platform/employer/${job.household_id}`} className="flex items-center">
+                <img src={job.household?.avatar_url || 'https://via.placeholder.com/40'} alt={job.household?.full_name} className="w-10 h-10 rounded-full mr-4" />
+                <div>
+                  <p className="font-semibold hover:underline">{job.household?.full_name}</p>
+                  <p className="text-sm text-gray-500">Household</p>
+                </div>
+            </Link>
           </div>
         
           <p className="mb-4">{job.description}</p>

@@ -13,6 +13,11 @@ CREATE TABLE public.profiles (
   -- For Households
   address TEXT,
   family_members INT,
+  bio TEXT,
+  expectations TEXT,
+  household_rules TEXT,
+  contact_preferences TEXT,
+  benefits_offered TEXT[],
 
   PRIMARY KEY (id)
 );
