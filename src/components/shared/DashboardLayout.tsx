@@ -27,6 +27,7 @@ const Sidebar = () => {
   const employerLinks = [
     { to: "/platform", icon: Home, label: "Dashboard" },
     { to: "/platform/workers", icon: Users, label: "My Workers" },
+    { to: "/platform/all-workers", icon: Users, label: "Browse Workers" },
     { to: "/platform/contracts", icon: FileText, label: "Contracts" },
   ];
 

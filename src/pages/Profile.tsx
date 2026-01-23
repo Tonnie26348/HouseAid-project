@@ -243,7 +243,7 @@ const Profile = () => {
                     name="hourly_rate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Hourly Rate (KSH)</FormLabel>
+                        <FormLabel>Monthly Rate (KSH)</FormLabel>
                         <FormControl>
                           <Input type="number" {...field} />
                         </FormControl>
