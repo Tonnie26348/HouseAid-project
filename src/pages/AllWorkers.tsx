@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import React from 'react';
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/components/ui/use-toast";
 import DashboardLayout from "@/components/shared/DashboardLayout";
@@ -172,7 +173,7 @@ const AllWorkers = () => {
             <Card key={worker.id}>
               <CardHeader className="flex flex-row items-center gap-4 space-y-0">
                 <Avatar className="w-16 h-16">
-                  <AvatarImage src={worker.avatar_url || 'https://via.placeholder.com/150'} />
+                  <AvatarImage src={worker.avatar_url || 'https://placehold.co/150x150'} />
                   <AvatarFallback>{worker.full_name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>
