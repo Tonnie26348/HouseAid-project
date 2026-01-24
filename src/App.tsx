@@ -28,6 +28,7 @@ const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AllWorkers = lazy(() => import("./pages/AllWorkers"));
 const EmployerProfileView = lazy(() => import("./pages/EmployerProfileView"));
+const WorkerContracts = lazy(() => import("./pages/WorkerContracts"));
 
 import MainLayout from "./components/shared/MainLayout";
 import { AuthProvider } from "./hooks/useAuth";
@@ -83,6 +84,7 @@ const App = () => (
 
               {/* Worker Protected Routes */}
               <Route element={<WorkerProtectedRoute />}>
+                <Route path="/platform/my-contracts" element={<WorkerContracts />} />
               </Route>
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

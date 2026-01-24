@@ -32,9 +32,9 @@ const Sidebar = () => {
   ];
 
   const workerLinks = [
-    { to: "/platform", icon: Home, label: "Dashboard" },
     { to: "/platform/profile", icon: User, label: "My Profile" },
     { to: "/platform/jobs", icon: FileText, label: "Jobs" },
+    { to: "/platform/my-contracts", icon: FileText, label: "My Contracts" },
   ];
 
   const links = user?.user_metadata.role === "employer" ? employerLinks : workerLinks;
